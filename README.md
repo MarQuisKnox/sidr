@@ -2,6 +2,10 @@
 
 Sidr is a jQuery plugin for creating side menus and the easiest way for doing your menu responsive. For a further description, documentation and others visit: [http://www.berriart.com/sidr](http://www.berriart.com/sidr)
 
+## This Fork (@MarQuisKnox)
+
+This fork (@MarQuisKnox) adds a feature to close all sidr elements simultaneously.
+
 ## Development
 
 - Source hosted at [GitHub](https://github.com/artberri/sidr)
