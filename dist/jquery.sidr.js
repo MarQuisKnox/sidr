@@ -131,9 +131,50 @@
 
         // onOpen callback
         onOpen();
-      }
-      // Close Sidr
-      else {
+      } else if ( action == 'closeAll' ) {
+          // close all    	  
+          // Lock sidr
+          sidrMoving = true;
+          
+          $('.sidr').each(function( index, value ) {
+        	  var value		= $(value);
+        	  var menuWidth	= value.width();
+        	  
+        	  if( value.hasClass('left') ) {                  
+                  bodyAnimation = {left: 0};
+                  menuAnimation = {left: '-' + menuWidth + 'px'};        		  
+        	  } else {
+                  bodyAnimation = {right: 0};
+                  menuAnimation = {right: '-' + menuWidth + 'px'};        		  
+        	  }
+        	               
+              // Close menu
+              if( $body.is('body') ) {
+                scrollTop = $html.scrollTop();
+                $html.removeAttr('style').scrollTop(scrollTop);
+              }
+              
+              $('body').addClass('sidr-animating').animate( 
+                  bodyAnimation, speed
+              ).removeClass( bodyClass );
+              
+              value.animate(menuAnimation, speed, function() {
+                value.removeAttr('style').hide();
+                $body.removeAttr('style');
+                $('html').removeAttr('style');
+                sidrMoving = false;
+                sidrOpened = false;
+                
+                // Callback
+                if(typeof callback === 'function') {
+                  callback(name);
+                }
+                
+                $('body').removeClass('sidr-animating');
+              });         	  
+          });        
+      } else {
+    	// Close Sidr
         // Check if we can close it
         if( !$menu.is(':visible') || sidrMoving ) {
           return;
@@ -185,6 +226,9 @@
     close: function(name, callback) {
       privateMethods.execute('close', name, callback);
     },
+    closeAll: function(callback) {
+        privateMethods.execute('closeAll', callback);
+    },    
     toggle: function(name, callback) {
       privateMethods.execute('toggle', name, callback);
     },
