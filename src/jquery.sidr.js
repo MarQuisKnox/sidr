@@ -149,9 +149,9 @@
         	  }
         	               
               // Close menu
-              if( $body.is('body') ) {
-                scrollTop = $html.scrollTop();
-                $html.removeAttr('style').scrollTop(scrollTop);
+              if( $('body').is('body') ) {
+                scrollTop = $('html').scrollTop();
+                $('html').removeAttr('style').scrollTop(scrollTop);
               }
               
               $('body').addClass('sidr-animating').animate( 
